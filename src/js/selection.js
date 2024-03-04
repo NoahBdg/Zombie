@@ -1,5 +1,14 @@
 import * as fct from "/src/js/fonctions.js";
-
+let playerHealth = 100;
+let zombieHealth = 50;
+let playerAmmo = 50;
+let playerScore = 0;
+let isGameOver = false;
+let zombie;
+let playerHealthText;
+let zombieHealthText;
+let ammoText;
+let scoreText;
 /***********************************************************************/
 /** VARIABLES GLOBALES 
 /***********************************************************************/
@@ -28,10 +37,8 @@ export default class selection extends Phaser.Scene {
     this.load.image("img_lift", "src/assets/lift.png");
     this.load.image("img_fond_1", "src/assets/doorsbackground.png");
     this.load.image("img_plateforme", "src/assets/platform.png");
-    this.load.spritesheet("img_perso", "src/assets/dude.png", {
-      frameWidth: 32,
-      frameHeight: 48
-    });
+    this.load.image("img_perso", "src/assets/pngegg.png");
+
     this.load.image("img_porte1", "src/assets/door1.png");
     this.load.image("img_porte2", "src/assets/door2.png");
     this.load.image("img_porte3", "src/assets/door3.png");
@@ -99,7 +106,7 @@ export default class selection extends Phaser.Scene {
     //  propriétées physiqyes de l'objet player :
     player.setBounce(0.0); // on donne un petit coefficient de rebond
     player.setCollideWorldBounds(true); // le player se cognera contre les bords du monde
-
+    /** 
     /***************************
      *  CREATION DES ANIMATIONS *
      ****************************/
