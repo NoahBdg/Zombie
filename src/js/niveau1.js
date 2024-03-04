@@ -19,7 +19,7 @@ export default class niveau1 extends Phaser.Scene {
     this.groupe_plateformes.create(200, 584, "img_plateforme");
     this.groupe_plateformes.create(600, 584, "img_plateforme");
     // ajout d'un texte distintcif  du niveau
-    this.add.text(400, 100, "Vous êtes dans le niveau 1", {
+    this.add.text(400, 100, "FG2 ZOMBIE", {
       fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
       fontSize: "22pt"
     });
@@ -41,13 +41,14 @@ export default class niveau1 extends Phaser.Scene {
     } else if (this.clavier.right.isDown) {
       this.player.setVelocityX(160);
       this.player.anims.play("anim_tourne_droite", true);
-    } else {
+    } else if (this.clavier.up.isDown) {
+      this.player.setVelocityY(-160);
+    }else if (this.down.right.isDown) {
+      this.player.setVelocityY(160);
+    }else {
       this.player.setVelocityX(0);
       this.player.anims.play("anim_face");
-    }
-    if (this.clavier.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-330);
-    }
+    
 
     if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
       if (this.physics.overlap(this.player, this.porte_retour)) {
@@ -55,4 +56,5 @@ export default class niveau1 extends Phaser.Scene {
       }
     }
   }
+}
 }

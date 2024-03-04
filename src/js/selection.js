@@ -35,13 +35,14 @@ export default class selection extends Phaser.Scene {
    */
   preload() {
     // tous les assets du jeu sont placés dans le sous-répertoire src/assets/
+    this.load.image("img_souris", "src/assets/souris.png");
     this.load.image("img_ciel", "src/assets/sky.png");
     this.load.image("img_lift", "src/assets/lift.png");
     this.load.image("img_fond_1", "src/assets/doorsbackground.png");
     this.load.image("img_plateforme", "src/assets/platform.png");
     this.load.spritesheet("img_perso", "src/assets/dude.png", {
       frameWidth: 32,
-      frameHeight: 48
+      frameHeigh: 48
     });
     this.load.image("img_porte1", "src/assets/door1.png");
     this.load.image("img_porte2", "src/assets/door2.png");
@@ -69,6 +70,11 @@ export default class selection extends Phaser.Scene {
     // On ajoute une simple image de fond, le ciel, au centre de la zone affichée (400, 300)
     // Par défaut le point d'ancrage d'une image est le centre de cette derniere
     this.add.image(400, 250, "img_fond_1");
+
+    this.add.text(250, 50, "FG2 ZOMBIE", {
+      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+      fontSize: "40pt"
+    });
 
     // la création d'un groupes permet de gérer simultanément les éléments d'une meme famille
     //  Le groupe groupe_plateformes contiendra le sol et deux platesformes sur lesquelles sauter
@@ -103,7 +109,7 @@ export default class selection extends Phaser.Scene {
     player = this.physics.add.sprite(100, 450, "img_perso");
 
     //  propriétées physiqyes de l'objet player :
-    player.setBounce(0.2); // on donne un petit coefficient de rebond
+    player.setBounce(0.0); // on donne un petit coefficient de rebond
     player.setCollideWorldBounds(true); // le player se cognera contre les bords du monde
 
     /***************************
@@ -164,17 +170,25 @@ export default class selection extends Phaser.Scene {
     if (clavier.left.isDown) {
       player.setVelocityX(-160);
       player.anims.play("anim_tourne_gauche", true);
-    } else if (clavier.right.isDown) {
-      player.setVelocityX(160);
-      player.anims.play("anim_tourne_droite", true);
-    } else {
+    } 
+   else if (clavier.right.isDown) {
+    player.setVelocityX(160);
+    player.anims.play("anim_tourne_droite", true);
+  }  
+   else if (clavier.up.isDown) {
+      player.setVelocityY(-160);
+    }
+   else if (clavier.down.isDown) {
+      player.setVelocityY(160);
+    }
+    else {
       player.setVelocityX(0);
+      player.setVelocityY(0);
       player.anims.play("anim_face");
-    }
+      }
+  
 
-    if (clavier.up.isDown && player.body.touching.down) {
-      player.setVelocityY(-330);
-    }
+    
 
     if (Phaser.Input.Keyboard.JustDown(clavier.space) == true) {
       if (this.physics.overlap(player, this.porte1))
