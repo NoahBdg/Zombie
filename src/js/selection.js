@@ -59,6 +59,11 @@ export default class selection extends Phaser.Scene {
     // Par défaut le point d'ancrage d'une image est le centre de cette derniere
     this.add.image(400, 250, "img_fond_1");
 
+    this.add.text(250, 50, "FG2 ZOMBIE", {
+      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+      fontSize: "40pt"
+    });
+
     // la création d'un groupes permet de gérer simultanément les éléments d'une meme famille
     //  Le groupe groupe_plateformes contiendra le sol et deux platesformes sur lesquelles sauter
     // notez le mot clé "staticGroup" : le static indique que ces élements sont fixes : pas de gravite,
