@@ -7,6 +7,17 @@ import * as fct from "/src/js/fonctions.js";
 var player; // désigne le sprite du joueur
 var clavier; // pour la gestion du clavier
 var groupe_plateformes;
+let playerHealth = 100;
+let zombieHealth = 50;
+let playerAmmo = 50;
+let playerScore = 0;
+let isGameOver = false;
+let zombie;
+let playerHealthText;
+let zombieHealthText;
+let ammoText;
+let scoreText;
+
 
 // définition de la classe "selection"
 export default class selection extends Phaser.Scene {
