@@ -22,7 +22,7 @@ var config = {
       gravity: {
         y: 300 // gravité verticale : acceleration ddes corps en pixels par seconde
       },
-      debug: true // permet de voir les hitbox et les vecteurs d'acceleration quand mis à true
+      debug: false // permet de voir les hitbox et les vecteurs d'acceleration quand mis à true
     }
   },
   scene: [selection, niveau1, niveau2, niveau3]
@@ -32,4 +32,3 @@ var config = {
 var game = new Phaser.Game(config);
 game.scene.start("selection");
 
-zizi
