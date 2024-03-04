@@ -36,12 +36,14 @@ export default class niveau3 extends Phaser.Scene {
     } else if (this.clavier.right.isDown) {
       this.player.setVelocityX(160);
       this.player.anims.play("anim_tourne_droite", true);
-    } else {
+    } else if (this.clavier.up.isDown) {
+      this.player.setVelocityY(-160);
+    }else if (this.clavier.down.isDown) {
+      this.player.setVelocityY(160);
+    }else {
       this.player.setVelocityX(0);
+      this.player.setVelocityY(0);
       this.player.anims.play("anim_face");
-    }
-    if (this.clavier.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-330);
     }
 
     if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
