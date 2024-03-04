@@ -114,7 +114,7 @@ export default class selection extends Phaser.Scene {
     // chaque animation est une succession de frame à vitesse de défilement défini
     // une animation doit avoir un nom. Quand on voudra la jouer sur un sprite, on utilisera la méthode play()
     // creation de l'animation "anim_tourne_gauche" qui sera jouée sur le player lorsque ce dernier tourne à gauche
-    this.anims.create({
+    /*this.anims.create({
       key: "anim_tourne_gauche", // key est le nom de l'animation : doit etre unique poru la scene.
       frames: this.anims.generateFrameNumbers("img_perso", {
         start: 0,
@@ -140,7 +140,7 @@ export default class selection extends Phaser.Scene {
       }),
       frameRate: 10,
       repeat: -1
-    });
+    });*/
 
     /***********************
      *  CREATION DU CLAVIER *
