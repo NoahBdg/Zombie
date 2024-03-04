@@ -8,10 +8,32 @@
     ],
     "file.lastUsedOpenFilter": "Tous les Fichiers (*)",
     "fileStates": {
+        "map2.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 1
+        },
+        "map3.tsx": {
+            "scaleInEditor": 1
+        },
+        "maptileset.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 2
+        },
+        "nazi_zombies_machines_by_im_not_crying_d5q09o7.tsx": {
+            "scaleInEditor": 1
+        }
     },
+    "last.imagePath": "C:/Users/utilisateur/Desktop/Zombie_Nino_Noah/Sprites",
+    "map.height": 600,
+    "map.width": 800,
     "openFiles": [
     ],
     "project": "level1.tiled-project",
     "recentFiles": [
-    ]
+        "nazi_zombies_machines_by_im_not_crying_d5q09o7.tsx",
+        "map3.tsx",
+        "map2.tsx",
+        "maptileset.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
 }

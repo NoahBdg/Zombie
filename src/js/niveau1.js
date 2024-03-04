@@ -43,7 +43,7 @@ export default class niveau1 extends Phaser.Scene {
       this.player.anims.play("anim_tourne_droite", true);
     } else if (this.clavier.up.isDown) {
       this.player.setVelocityY(-160);
-    }else if (this.down.right.isDown) {
+    }else if (this.clavier.down.isDown) {
       this.player.setVelocityY(160);
     }else {
       this.player.setVelocityX(0);
