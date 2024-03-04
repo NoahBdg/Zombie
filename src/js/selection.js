@@ -25,6 +25,7 @@ export default class selection extends Phaser.Scene {
   preload() {
     // tous les assets du jeu sont placés dans le sous-répertoire src/assets/
     this.load.image("img_ciel", "src/assets/sky.png");
+    this.load.image("img_fond_1", "src/assets/doorsbackground.png");
     this.load.image("img_plateforme", "src/assets/platform.png");
     this.load.spritesheet("img_perso", "src/assets/dude.png", {
       frameWidth: 32,
@@ -55,7 +56,7 @@ export default class selection extends Phaser.Scene {
 
     // On ajoute une simple image de fond, le ciel, au centre de la zone affichée (400, 300)
     // Par défaut le point d'ancrage d'une image est le centre de cette derniere
-    this.add.image(400, 300, "img_ciel");
+    this.add.image(400, 250, "img_fond_1");
 
     // la création d'un groupes permet de gérer simultanément les éléments d'une meme famille
     //  Le groupe groupe_plateformes contiendra le sol et deux platesformes sur lesquelles sauter
