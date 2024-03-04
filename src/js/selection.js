@@ -7,17 +7,6 @@ import * as fct from "/src/js/fonctions.js";
 var player; // désigne le sprite du joueur
 var clavier; // pour la gestion du clavier
 var groupe_plateformes;
-let playerHealth = 100;
-let zombieHealth = 50;
-let playerAmmo = 50;
-let playerScore = 0;
-let isGameOver = false;
-let zombie;
-let playerHealthText;
-let zombieHealthText;
-let ammoText;
-let scoreText;
-
 
 // définition de la classe "selection"
 export default class selection extends Phaser.Scene {
@@ -35,14 +24,13 @@ export default class selection extends Phaser.Scene {
    */
   preload() {
     // tous les assets du jeu sont placés dans le sous-répertoire src/assets/
-    this.load.image("img_souris", "src/assets/souris.png");
     this.load.image("img_ciel", "src/assets/sky.png");
     this.load.image("img_lift", "src/assets/lift.png");
     this.load.image("img_fond_1", "src/assets/doorsbackground.png");
     this.load.image("img_plateforme", "src/assets/platform.png");
     this.load.spritesheet("img_perso", "src/assets/dude.png", {
       frameWidth: 32,
-      frameHeigh: 48
+      frameHeight: 48
     });
     this.load.image("img_porte1", "src/assets/door1.png");
     this.load.image("img_porte2", "src/assets/door2.png");
