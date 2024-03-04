@@ -20,7 +20,7 @@ var config = {
     arcade: {
       // parametres du mode arcade
       gravity: {
-        y: 1 // gravité verticale : acceleration ddes corps en pixels par seconde
+        y: 0 // gravité verticale : acceleration ddes corps en pixels par seconde
       },
       debug: false // permet de voir les hitbox et les vecteurs d'acceleration quand mis à true
     }
