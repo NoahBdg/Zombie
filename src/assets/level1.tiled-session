@@ -16,11 +16,26 @@
                 "y": 509
             }
         },
+        "map/map1.tmx#map": {
+            "scaleInEditor": 1
+        },
+        "map/map3.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "map/maptileset.tsx": {
+            "scaleInDock": 1
+        },
+        "map/nazi_zombies_machines_by_im_not_crying_d5q09o7.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "map2.tsx": {
             "scaleInDock": 3,
             "scaleInEditor": 1
         },
         "map3.tsx": {
+            "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "maptileset.tsx": {
@@ -28,6 +43,7 @@
             "scaleInEditor": 2
         },
         "nazi_zombies_machines_by_im_not_crying_d5q09o7.tsx": {
+            "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "niveau1.json": {
@@ -39,17 +55,20 @@
             }
         }
     },
-    "last.exportedFilePath": "C:/Users/utilisateur/Desktop/Zombie_Nino_Noah/Zombie/src",
+    "last.exportedFilePath": "C:/Users/utilisateur/Desktop/Zombie_Nino_Noah/Zombie/src/assets",
     "last.imagePath": "C:/Users/utilisateur/Desktop/Zombie_Nino_Noah/Sprites",
     "map.height": 600,
-    "map.lastUsedExportFilter": "Tous les Fichiers (*)",
-    "map.lastUsedFormat": "json",
+    "map.lastUsedExportFilter": "Fichiers de carte JSON (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
     "map.width": 800,
     "openFiles": [
     ],
     "project": "level1.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "map/nazi_zombies_machines_by_im_not_crying_d5q09o7.tsx",
+        "map/map3.tsx",
+        "niveau1.json",
         "nazi_zombies_machines_by_im_not_crying_d5q09o7.tsx",
         "map3.tsx",
         "map2.tsx",

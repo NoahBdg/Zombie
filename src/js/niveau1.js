@@ -35,12 +35,12 @@ export default class niveau1 extends Phaser.Scene {
     this.physics.add.collider(this.player, this.groupe_plateformes);
 
     // chargement de la carte
-    const carteDuNiveau = this.add.tilemap(this, "carte_niveau1");
+    const carteDuNiveau = this.add.tilemap("carte_niveau1");
 
     // chargement du jeu de tuiles
-    const tileset1 = carteDuNiveau.addTilesetImage("tuiles_de_jeu1","Phaser_tuilesdejeu_1");
+    const tileset1 = carteDuNiveau.addTilesetImage("map","Phaser_tuilesdejeu_1");
 
-    const tileset2 = carteDuNiveau.addTilesetImage("tuiles_de_jeu2", "Phaser_tuilesdejeu_2" );
+    const tileset2 = carteDuNiveau.addTilesetImage("map3", "Phaser_tuilesdejeu_2" );
 
     const calque_background_1 = carteDuNiveau.createLayer("Calque de Tuiles 1",[tileset1, tileset2] ,0 ,0);
 
@@ -48,7 +48,7 @@ export default class niveau1 extends Phaser.Scene {
 
     const calque_background_3 = carteDuNiveau.createLayer("Calque de Tuiles 3",[tileset1, tileset2], 0, 0);
     
-    const calque_background_4 = carteDuNiveau.createLayer("Calque mur",[tileset1, tileset2], 0, 0);
+    const calque_background_4 = carteDuNiveau.createLayer("calque mur",[tileset1, tileset2], 0, 0);
 
     // définition des tuiles de plateformes qui sont solides
     // utilisation de la propriété estSolide
