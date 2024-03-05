@@ -27,12 +27,6 @@ export default class niveau1 extends Phaser.Scene {
 
     this.porte_retour = this.physics.add.staticSprite(100, 530, "img_porte1");
 
-    this.player = this.physics.add.sprite(100, 450, "img_perso");
-    this.player.refreshBody();
-    this.player.setBounce(0.0);
-    this.player.setCollideWorldBounds(true);
-    this.clavier = this.input.keyboard.createCursorKeys();
-    this.physics.add.collider(this.player, this.groupe_plateformes);
 
     // chargement de la carte
     const carteDuNiveau = this.add.tilemap("carte_niveau1");
@@ -53,6 +47,15 @@ export default class niveau1 extends Phaser.Scene {
     // définition des tuiles de plateformes qui sont solides
     // utilisation de la propriété estSolide
     //calque_background_3.setCollisionByProperty({ estSolide: true });
+
+    this.player = this.physics.add.sprite(100, 450, "img_perso");
+    this.player.refreshBody();
+    this.player.setBounce(0.0);
+    this.player.setCollideWorldBounds(true);
+
+    this.clavier = this.input.keyboard.createCursorKeys();
+    this.physics.add.collider(this.player, this.groupe_plateformes);
+
 
     this.physics.add.collider(this.player, calque_background_3);
 
