@@ -28,19 +28,13 @@ export default class niveau1 extends Phaser.Scene {
     this.player.setCollideWorldBounds(true);
     this.clavier = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(this.player, this.groupe_plateformes);
-    playerHealthText = this.add.bitmapText(20, 20, 'creepster', 'Player Health: 100', { fontSize: '24px', fill: '#fff' });
-    zombieHealthText = this.add.bitmapText(600, 20, 'creepster', 'Zombie Health: 50', { fontSize: '24px', fill: '#fff' });
-  // Afficher les munitions en dessous de la santé du joueur avec une police de 24px et en blanc
-  ammoText = this.add.bitmapText(20, 50, 'creepster', 'Ammo: 50', { fontSize: '24px', fill: '#fff' });
-// Afficher le score en dessous des munitions avec une police de 24px et en blanc
-scoreText = this.add.bitmapText(20, 80, 'creepster', 'Score: 0', { fontSize: '24px', fill: '#fff' });
   }
 
   update() {
     if (this.clavier.left.isDown) {
       this.player.setVelocityX(-160);
       this.player.anims.play("anim_tourne_gauche", true);
-    } else if  (this.clavier.right.isDown) {
+    } else if (this.clavier.right.isDown) {
       this.player.setVelocityX(160);
       this.player.anims.play("anim_tourne_droite", true);
     } else if (this.clavier.up.isDown) {

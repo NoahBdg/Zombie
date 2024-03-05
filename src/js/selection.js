@@ -164,11 +164,9 @@ export default class selection extends Phaser.Scene {
     
     if (clavier.left.isDown) {
       player.setVelocityX(-250);
-      player.anims.play("anim_tourne_gauche", true);
     } 
    else if (clavier.right.isDown) {
     player.setVelocityX(250);
-    player.anims.play("anim_tourne_droite", true);
   }  
    else if (clavier.up.isDown) {
       player.setVelocityY(-250);
@@ -179,7 +177,7 @@ export default class selection extends Phaser.Scene {
     else {
       player.setVelocityX(0);
       player.setVelocityY(0);
-      player.anims.play("anim_face");
+
       }
   
 
