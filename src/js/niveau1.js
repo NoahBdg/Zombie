@@ -20,7 +20,7 @@ export default class niveau1 extends Phaser.Scene {
     this.groupe_plateformes.create(600, 584, "img_plateforme");
     // ajout d'un texte distintcif  du niveau
 
-    this.porte_retour = this.physics.add.staticSprite(100, 550, "img_porte1");
+    this.porte_retour = this.physics.add.staticSprite(100, 530, "img_porte1");
 
     this.player = this.physics.add.sprite(100, 450, "img_perso");
     this.player.refreshBody();

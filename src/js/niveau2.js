@@ -18,7 +18,7 @@ export default class niveau2 extends Phaser.Scene {
       fontSize: "22pt"
     });
 
-    this.porte_retour = this.physics.add.staticSprite(100, 550, "img_porte2");
+    this.porte_retour = this.physics.add.staticSprite(100, 530, "img_porte2");
 
     this.player = this.physics.add.sprite(100, 450, "img_perso");
     this.player.refreshBody();
