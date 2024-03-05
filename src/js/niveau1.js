@@ -46,7 +46,7 @@ export default class niveau1 extends Phaser.Scene {
 
     // définition des tuiles de plateformes qui sont solides
     // utilisation de la propriété estSolide
-    //calque_background_3.setCollisionByProperty({ estSolide: true });
+    calque_background_3.setCollisionByProperty({ estSolide: true });
 
     this.player = this.physics.add.sprite(100, 450, "img_perso");
     this.player.refreshBody();
