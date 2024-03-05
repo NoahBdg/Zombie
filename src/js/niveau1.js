@@ -49,17 +49,17 @@ export default class niveau1 extends Phaser.Scene {
     const carteDuNiveau = this.add.tilemap("carte_niveau1");
 
     // chargement du jeu de tuiles
-    const tileset1 = carteDuNiveau.addTilesetImage("map","Phaser_tuilesdejeu_1");
+    const tileset1 = carteDuNiveau.addTilesetImage("map", "Phaser_tuilesdejeu_1");
 
-    const tileset2 = carteDuNiveau.addTilesetImage("map3", "Phaser_tuilesdejeu_2" );
+    const tileset2 = carteDuNiveau.addTilesetImage("map3", "Phaser_tuilesdejeu_2");
 
-    const calque_background_1 = carteDuNiveau.createLayer("Calque de Tuiles 1",[tileset1, tileset2] ,0 ,0);
+    const calque_background_1 = carteDuNiveau.createLayer("Calque de Tuiles 1", [tileset1, tileset2], 0, 0);
 
-    const calque_background_2 = carteDuNiveau.createLayer("Calque de Tuiles 2",[tileset1, tileset2], 0, 0);
+    const calque_background_2 = carteDuNiveau.createLayer("Calque de Tuiles 2", [tileset1, tileset2], 0, 0);
 
-    const calque_background_3 = carteDuNiveau.createLayer("Calque de Tuiles 3",[tileset1, tileset2], 0, 0);
-    
-    const calque_background_4 = carteDuNiveau.createLayer("calque mur",[tileset1, tileset2], 0, 0);
+    const calque_background_3 = carteDuNiveau.createLayer("Calque de Tuiles 3", [tileset1, tileset2], 0, 0);
+
+    const calque_background_4 = carteDuNiveau.createLayer("calque mur", [tileset1, tileset2], 0, 0);
 
     // définition des tuiles de plateformes qui sont solides
     // utilisation de la propriété estSolide
@@ -81,7 +81,7 @@ export default class niveau1 extends Phaser.Scene {
     // ancrage de la caméra sur le joueur
     this.cameras.main.startFollow(this.player2);
     // player.setCollideWorldBounds(true);
-this.anims.create({
+    this.anims.create({
       key: "anim_tourne_gauche", // key est le nom de l'animation : doit etre unique poru la scene.
       frames: this.anims.generateFrameNumbers("jauneg", {
         start: 0,
@@ -95,12 +95,12 @@ this.anims.create({
       frames: this.anims.generateFrameNumbers("dead", {
         start: 0,
         end: 1
-    }),
-    frameRate:2,
-    repeat:-1
+      }),
+      frameRate: 2,
+      repeat: -1
     });
-    
-    
+
+
     // creation de l'animation "anim_tourne_droite" qui sera jouée sur le player lorsque ce dernier tourne à droite
     this.anims.create({
       key: "anim_tourne_droite",
@@ -146,8 +146,8 @@ this.anims.create({
         }
       }
     }
-    this.healthBar.x = (this.player2.x - this.player2.width / 2)-25; // Place la barre de santé au centre horizontal du joueur
-    this.healthBar.y = this.player2.y - this.player2.height+15; // Place la barre de santé au-dessus du joueur
+    this.healthBar.x = (this.player2.x - this.player2.width / 2) - 25; // Place la barre de santé au centre horizontal du joueur
+    this.healthBar.y = this.player2.y - this.player2.height + 15; // Place la barre de santé au-dessus du joueur
 
     // Mise à jour de la barre de santé en fonction des points de vie du joueur
     const playerHealthPercentage = this.player2Health / 100; // Calcule le pourcentage de points de vie restants du joueur
