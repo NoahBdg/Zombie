@@ -13,6 +13,7 @@ export default class niveau1 extends Phaser.Scene {
     // chargement tuiles de jeu
     this.load.image("Phaser_tuilesdejeu_1", "src/assets/nazi_zombie_tiles.png");
     this.load.image("Phaser_tuilesdejeu_2", "src/assets/nazi_zombies_machines.png");
+    this.load.image("bullet1", "src/assets/bullet.png");
     this.load.spritesheet("perso2", "src/assets/jaune.png", {
       frameWidth: 32,
       frameHeight: 48
