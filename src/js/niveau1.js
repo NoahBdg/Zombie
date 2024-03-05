@@ -1,4 +1,5 @@
 import * as fct from "/src/js/fonctions.js";
+var player2;//désigne le sprite du joueur
 
 export default class niveau1 extends Phaser.Scene {
   // constructeur de la classe
@@ -11,7 +12,22 @@ export default class niveau1 extends Phaser.Scene {
     // chargement tuiles de jeu
     this.load.image("Phaser_tuilesdejeu_1", "src/assets/nazi_zombie_tiles.png");
     this.load.image("Phaser_tuilesdejeu_2", "src/assets/nazi_zombies_machines.png");
-
+    this.load.spritesheet("perso2", "src/assets/jaune.png", {
+      frameWidth: 32,
+      frameHeight: 48
+    });
+    this.load.spritesheet("jauneg", "src/assets/jaune_coursg.png", {
+      frameWidth: 48,
+      frameHeight: 48
+    });
+    this.load.spritesheet("jauned", "src/assets/jaune_cours.png", {
+      frameWidth: 48,
+      frameHeight: 48
+    });
+    this.load.spritesheet("dead", "src/assets/jaune_meurt.png", {
+      frameWidth: 48,
+      frameHeight: 48
+    });
     // chargement de la carte
     this.load.tilemapTiledJSON("carte_niveau1", "src/assets/map1.json");
   }
@@ -48,46 +64,73 @@ export default class niveau1 extends Phaser.Scene {
     // utilisation de la propriété estSolide
     calque_background_3.setCollisionByProperty({ estSolide: true });
 
-    this.player = this.physics.add.sprite(100, 450, "img_perso");
-    this.player.refreshBody();
-    this.player.setBounce(0.0);
-    this.player.setCollideWorldBounds(true);
+    this.player2 = this.physics.add.sprite(100, 450, "perso2");
+    this.player2.setBounce(0.0);
+    this.player2.setCollideWorldBounds(true);
 
     this.clavier = this.input.keyboard.createCursorKeys();
-    this.physics.add.collider(this.player, this.groupe_plateformes);
+    this.physics.add.collider(this.player2, this.groupe_plateformes);
 
 
-    this.physics.add.collider(this.player, calque_background_3);
+    this.physics.add.collider(this.player2, calque_background_3);
 
     this.physics.world.setBounds(0, 0, 3200, 640);
     //  ajout du champs de la caméra de taille identique à celle du monde
     this.cameras.main.setBounds(0, 0, 3200, 640);
     // ancrage de la caméra sur le joueur
-    this.cameras.main.startFollow(this.player);
+    this.cameras.main.startFollow(this.player2);
     // player.setCollideWorldBounds(true);
-
+this.anims.create({
+      key: "anim_tourne_gauche", // key est le nom de l'animation : doit etre unique poru la scene.
+      frames: this.anims.generateFrameNumbers("jauneg", {
+        start: 0,
+        end: 5
+      }), // on prend toutes les frames de img perso numerotées de 0 à 3
+      frameRate: 5, // vitesse de défilement des frames
+      repeat: -1 // nombre de répétitions de l'animation. -1 = infini
+    });
+    this.anims.create({
+      key: "anim_face",
+      frames: this.anims.generateFrameNumbers("dead", {
+        start: 0,
+        end: 1
+    }),
+    frameRate:2,
+    repeat:-1
+    });
+    
+    
+    // creation de l'animation "anim_tourne_droite" qui sera jouée sur le player lorsque ce dernier tourne à droite
+    this.anims.create({
+      key: "anim_tourne_droite",
+      frames: this.anims.generateFrameNumbers("jauned", {
+        start: 0,
+        end: 5
+      }),
+      frameRate: 5,
+      repeat: -1
+    });
   }
 
 
   update() {
     if (this.clavier.left.isDown) {
-      this.player.setVelocityX(-160);
-      //this.player.anims.play("anim_tourne_gauche", true);
+      this.player2.setVelocityX(-160);
+      this.player2.anims.play("anim_tourne_gauche", true);
     } else if (this.clavier.right.isDown) {
-      this.player.setVelocityX(160);
-      // this.player.anims.play("anim_tourne_droite", true);
+      this.player2.setVelocityX(160);
+      this.player2.anims.play("anim_tourne_droite", true);
     } else if (this.clavier.up.isDown) {
-      this.player.setVelocityY(-160);
+      this.player2.setVelocityY(-160);
     } else if (this.clavier.down.isDown) {
-      this.player.setVelocityY(160);
+      this.player2.setVelocityY(160);
     } else {
-      this.player.setVelocityX(0);
-      this.player.setVelocityY(0);
-      //this.player.anims.play("anim_face");
-
+      this.player2.setVelocityX(0);
+      this.player2.setVelocityY(0);
+      this.player2.anims.play("anim_face");
 
       if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
-        if (this.physics.overlap(this.player, this.porte_retour)) {
+        if (this.physics.overlap(this.player2, this.porte_retour)) {
           this.scene.switch("selection");
         }
       }

@@ -13,7 +13,7 @@ let scoreText;
 /** VARIABLES GLOBALES 
 /***********************************************************************/
 
-var player; // désigne le sprite du joueur
+var player; // désigne le sprite du cursor
 var clavier; // pour la gestion du clavier
 var groupe_plateformes;
 
@@ -177,7 +177,7 @@ export default class selection extends Phaser.Scene {
     else {
       player.setVelocityX(0);
       player.setVelocityY(0);
-      player.anims.play("anim_face");
+      //player.anims.play("anim_face");
       }
   
 
