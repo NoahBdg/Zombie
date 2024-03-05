@@ -92,9 +92,9 @@ export default class selection extends Phaser.Scene {
     /****************************
      *  Ajout des portes   *
      ****************************/
-    this.porte1 = this.physics.add.staticSprite(600, 414, "img_porte1");
-    this.porte2 = this.physics.add.staticSprite(50, 264, "img_porte2");
-    this.porte3 = this.physics.add.staticSprite(750, 234, "img_porte3");
+    this.porte1 = this.physics.add.staticSprite(600, 394, "img_porte1");
+    this.porte2 = this.physics.add.staticSprite(50, 244, "img_porte2");
+    this.porte3 = this.physics.add.staticSprite(750, 214, "img_porte3");
 
     /****************************
      *  CREATION DU PERSONNAGE  *
@@ -164,11 +164,9 @@ export default class selection extends Phaser.Scene {
     
     if (clavier.left.isDown) {
       player.setVelocityX(-250);
-      player.anims.play("anim_tourne_gauche", true);
     } 
    else if (clavier.right.isDown) {
     player.setVelocityX(250);
-    player.anims.play("anim_tourne_droite", true);
   }  
    else if (clavier.up.isDown) {
       player.setVelocityY(-250);

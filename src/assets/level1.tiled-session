@@ -8,6 +8,14 @@
     ],
     "file.lastUsedOpenFilter": "Tous les Fichiers (*)",
     "fileStates": {
+        "map/map1.json": {
+            "scale": 0.5,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": -153,
+                "y": 509
+            }
+        },
         "map2.tsx": {
             "scaleInDock": 3,
             "scaleInEditor": 1
@@ -21,6 +29,14 @@
         },
         "nazi_zombies_machines_by_im_not_crying_d5q09o7.tsx": {
             "scaleInEditor": 1
+        },
+        "niveau1.json": {
+            "scale": 0.5,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 403,
+                "y": 383
+            }
         }
     },
     "last.exportedFilePath": "C:/Users/utilisateur/Desktop/Zombie_Nino_Noah/Zombie/src",
