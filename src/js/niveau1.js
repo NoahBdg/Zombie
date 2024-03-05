@@ -13,7 +13,7 @@ export default class niveau1 extends Phaser.Scene {
     this.load.image("Phaser_tuilesdejeu_2", "src/assets/nazi_zombies_machines.png");
 
     // chargement de la carte
-    this.load.tilemapTiledJSON("carte_niveau1", "src/assets/map/map1.json");
+    this.load.tilemapTiledJSON("carte_niveau1", "src/assets/map1.json");
   }
 
   create() {
