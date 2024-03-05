@@ -10,7 +10,7 @@ export default class niveau1 extends Phaser.Scene {
   preload() {
     // chargement tuiles de jeu
     this.load.image("Phaser_tuilesdejeu_1", "src/assets/nazi_zombie_tiles.png");
-    this.load.image("Phasrt_tuilesdejeu_2", "src/assets/nazi_zombies_machines.png");
+    this.load.image("Phaser_tuilesdejeu_2", "src/assets/nazi_zombies_machines.png");
 
     // chargement de la carte
     this.load.tilemapTiledJSON("carte_niveau1", "src/assets/map/map1.json");
@@ -21,9 +21,9 @@ export default class niveau1 extends Phaser.Scene {
     fct.doAlsoNothing();
 
     //this.add.image(400, 300, "img_ciel");
-    this.groupe_plateformes = this.physics.add.staticGroup();
-    this.groupe_plateformes.create(200, 584, "img_plateforme");
-    this.groupe_plateformes.create(600, 584, "img_plateforme");
+    //this.groupe_plateformes = this.physics.add.staticGroup();
+    //this.groupe_plateformes.create(200, 584, "img_plateforme");
+    //this.groupe_plateformes.create(600, 584, "img_plateforme");
 
     this.porte_retour = this.physics.add.staticSprite(100, 530, "img_porte1");
 
