@@ -156,18 +156,18 @@ export default class selection extends Phaser.Scene {
   update() {
     
     if (clavier.left.isDown) {
-      player.setVelocityX(-160);
+      player.setVelocityX(-250);
       player.anims.play("anim_tourne_gauche", true);
     } 
    else if (clavier.right.isDown) {
-    player.setVelocityX(160);
+    player.setVelocityX(250);
     player.anims.play("anim_tourne_droite", true);
   }  
    else if (clavier.up.isDown) {
-      player.setVelocityY(-160);
+      player.setVelocityY(-250);
     }
    else if (clavier.down.isDown) {
-      player.setVelocityY(160);
+      player.setVelocityY(250);
     }
     else {
       player.setVelocityX(0);

@@ -19,10 +19,6 @@ export default class niveau1 extends Phaser.Scene {
     this.groupe_plateformes.create(200, 584, "img_plateforme");
     this.groupe_plateformes.create(600, 584, "img_plateforme");
     // ajout d'un texte distintcif  du niveau
-    this.add.text(400, 100, "FG2 ZOMBIE", {
-      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
-      fontSize: "22pt"
-    });
 
     this.porte_retour = this.physics.add.staticSprite(100, 550, "img_porte1");
 
