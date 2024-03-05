@@ -1,4 +1,5 @@
 import * as fct from "/src/js/fonctions.js";
+
 var player2;//désigne le sprite du joueur
 
 export default class niveau1 extends Phaser.Scene {
@@ -110,6 +111,16 @@ this.anims.create({
       frameRate: 5,
       repeat: -1
     });
+    this.healthBar = this.add.graphics(); // Crée un objet Graphics pour dessiner la barre de santé
+    const screenWidth = this.cameras.main.width; // Largeur de l'écran
+    this.healthBar.x = 10; // Position horizontale de la barre de santé
+    this.healthBar.y = 10; // Position verticale de la barre de santé
+    this.healthBar.fillStyle(0x00ff00, 1); // Couleur de remplissage de la barre de santé (rouge)
+    this.healthBar.fillRect(0, 0, 100, 6.67); // Dessine un rectangle pour représenter la barre de santé, avec une largeur de 200 pixels et une hauteur de 20 pixels
+
+    // Autres initialisations
+    this.player2Health = 100; // Points de vie initiaux du joueur
+    // ...
   }
 
 
@@ -135,5 +146,15 @@ this.anims.create({
         }
       }
     }
+    this.healthBar.x = (this.player2.x - this.player2.width / 2)-25; // Place la barre de santé au centre horizontal du joueur
+    this.healthBar.y = this.player2.y - this.player2.height+15; // Place la barre de santé au-dessus du joueur
+
+    // Mise à jour de la barre de santé en fonction des points de vie du joueur
+    const playerHealthPercentage = this.player2Health / 100; // Calcule le pourcentage de points de vie restants du joueur
+
+    // Mettez à jour la largeur de la barre de santé en fonction du pourcentage de points de vie du joueur
+    this.healthBar.clear(); // Efface le contenu précédent de la barre de santé
+    this.healthBar.fillStyle(0x00ff00, 1); // Réapplique la couleur de remplissage (rouge)
+    this.healthBar.fillRect(0, 0, 100 * playerHealthPercentage, 6.67); // Redessine la barre de santé avec la nouvelle largeur
   }
 }
