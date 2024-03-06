@@ -14,7 +14,7 @@ export default class niveau1 extends Phaser.Scene {
     super({
       key: "niveau1" //  ici on précise le nom de la classe en tant qu'identifiant
     });
-    
+
     this.calque_background_3 = null;
 
   }
@@ -229,6 +229,18 @@ export default class niveau1 extends Phaser.Scene {
     bullet.setCollideWorldBounds(true);
     bullet.body.allowGravity = false;
     bullet.setVelocity(1000 * coefDir, 0);
+    
+
+    this.physics.add.collider(bullet, zombies, (bullet, zombie) => {
+      bullet.destroy(); // Détruire la balle lorsqu'elle touche un zombie
+
+      zombie.hp -= 50; // Appliquer 50 points de dégâts au zombie
+
+      if (zombie.hp <= 0) {
+          zombie.destroy(); // Détruire le zombie si ses points de vie tombent à zéro
+          zombCount--; // Décrémenter le nombre de zombies restants
+      }
+  });
 
     this.ballesTirees.push(bullet); // Ajoutez la balle au tableau des balles tirées
 
