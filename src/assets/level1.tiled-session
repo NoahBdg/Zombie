@@ -67,19 +67,19 @@
             "scaleInEditor": 1
         },
         "niveau1.json": {
-            "scale": 1.5,
-            "selectedLayer": 3,
+            "scale": 0.75,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 583,
-                "y": 381.66666666666663
+                "x": 468,
+                "y": 570
             }
         },
         "niveau2.json": {
             "scale": 0.75,
-            "selectedLayer": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 754,
-                "y": 532
+                "x": 450.66666666666663,
+                "y": 564.6666666666665
             }
         },
         "niveau2.json#nazi_zombie_tiles": {
@@ -98,9 +98,9 @@
     "project": "level1.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "niveau2.json",
         "maptileset.tsx",
         "niveau1.json",
+        "niveau2.json",
         "map/map1.tmx",
         "map/nazi_zombies_machines_by_im_not_crying_d5q09o7.tsx",
         "map/map3.tsx",

@@ -52,7 +52,7 @@ this.load.spritesheet("dead", "src/assets/jaune_meurt.png", {
 
     const calque_background_3 = carteDuNiveau2.createLayer("Calque de Tuiles 3",[tileset1, tileset2], 0, 0);
 
-    calque_background_2.setCollisionByProperty({ Estsolide: true });
+    calque_background_2.setCollisionByProperty({ EstSolide: true });
 
 
     this.player2 = this.physics.add.sprite(200, 450, "perso2");
@@ -62,9 +62,9 @@ this.load.spritesheet("dead", "src/assets/jaune_meurt.png", {
 
     this.physics.add.collider(this.player2, calque_background_2);
 
-    this.physics.world.setBounds(0, 0, 3200, 1200);
+    this.physics.world.setBounds(0, 0, 1600, 1200);
     //  ajout du champs de la caméra de taille identique à celle du monde
-    this.cameras.main.setBounds(0, 0, 3200, 1200);
+    this.cameras.main.setBounds(0, 0, 1600, 1200);
     // ancrage de la caméra sur le joueur
     this.cameras.main.startFollow(this.player2);
     // player.setCollideWorldBounds(true);
