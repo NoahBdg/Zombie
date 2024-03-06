@@ -1,7 +1,9 @@
 import * as fct from "/src/js/fonctions.js";
 
 var player2;//désigne le sprite du joueur
-
+var zombies;
+var waveCount = 0 ; // Compteur de vagues
+var zombCount
 export default class niveau1 extends Phaser.Scene {
   // constructeur de la classe
   constructor() {
@@ -39,11 +41,14 @@ export default class niveau1 extends Phaser.Scene {
   create() {
     fct.doNothing();
     fct.doAlsoNothing();
+    zombies = this.physics.add.group();
+    this.time.addEvent({
+      delay: 3000, // Délai entre chaque vague de zombies
+      loop: false,
+      callback: createWave,
+      callbackScope: this
+  });
 
-    //this.add.image(400, 300, "img_ciel");
-    //this.groupe_plateformes = this.physics.add.staticGroup();
-    //this.groupe_plateformes.create(200, 584, "img_plateforme");
-    //this.groupe_plateformes.create(600, 584, "img_plateforme");
 
     this.porte_retour = this.physics.add.staticSprite(100, 530, "img_porte1");
 
@@ -70,7 +75,9 @@ export default class niveau1 extends Phaser.Scene {
 
     this.player2 = this.physics.add.sprite(100, 450, "perso2");
     this.player2.setBounce(0.0);
+
     this.player2.setCollideWorldBounds(true);
+    this.physics.add.collider(zombies, calque_background_3);
 
     this.clavier = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(this.player2, this.groupe_plateformes);
@@ -124,7 +131,18 @@ export default class niveau1 extends Phaser.Scene {
     // Autres initialisations
     this.player2Health = 100; // Points de vie initiaux du joueur
     // ...
+    function createWave() {
+      for (var i = 0; i < 5 + waveCount * 2; i++) {
+          var a = Phaser.Math.Between(1, 550);
+          var b = Phaser.Math.Between(620, 660);
+          var zombie = zombies.create(650, 450, 'zombie');
+          zombie.direction = Phaser.Math.Between(-30, 30);
+          zombie.vitesse = ((waveCount + 1) / 3) * (-50);
+                  zombie.body.setBounce(1); // 1 signifie un rebondissement total
 
+      }
+      waveCount++;
+  }
   }
 
 
@@ -161,8 +179,14 @@ export default class niveau1 extends Phaser.Scene {
     this.healthBar.fillStyle(0x00ff00, 1); // Réapplique la couleur de remplissage (rouge)
     this.healthBar.fillRect(0, 0, 100 * playerHealthPercentage, 6.67); // Redessine la barre de santé avec la nouvelle largeur
 
-
-
+    zombies.children.iterate(function (zombie) {
+      zombie.setVelocityX(zombie.direction);
+      zombie.setVelocityY(zombie.vitesse);
+      
+      });
+    if (1==2) {
+      createWave(); // Créer une nouvelle vague
+    }
   }
 
 }
