@@ -252,7 +252,7 @@ export default class niveau1 extends Phaser.Scene {
   }
 
   createWave() {
-    for (var i = 0; i <= 5 + waveCount * 2; i++) {
+    for (var i = 0; i <= 6 + waveCount * 2; i++) {
         var a = Phaser.Math.Between(1, 550);
         var b = Phaser.Math.Between(620, 660);
         var zombie = zombies.create(650, 450, 'zombie');
