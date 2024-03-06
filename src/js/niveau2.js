@@ -1,3 +1,21 @@
+var boutonFeu;
+var groupeBullets;
+var cursors;
+var player2;
+
+
+function tirer(player2) {
+  var coefDir;
+  if (this.player2.direction == 'left') { coefDir = -1; } else { coefDir = 1 }
+  // on crée la balle a coté du joueur
+  var bullet = groupeBullets.create(this.player2.x + (25 * coefDir), this.player2.y - 4, 'bullet1');
+  // parametres physiques de la balle.
+  bullet.setCollideWorldBounds(true);
+  bullet.body.allowGravity = false;
+  bullet.setVelocity(1000 * coefDir, 0); // vitesse en x et en y
+}
+
+
 export default class niveau2 extends Phaser.Scene {
   // constructeur de la classe
   constructor() {
@@ -5,52 +23,53 @@ export default class niveau2 extends Phaser.Scene {
       key: "niveau2" //  ici on précise le nom de la classe en tant qu'identifiant
     });
   }
+
   preload() {
- // chargement tuiles de jeu
- this.load.image("Phaser_tuilesdejeu_1", "src/assets/nazi_zombie_tiles.png");
- this.load.image("Phaser_tuilesdejeu_2", "src/assets/nazi_zombies_machines.png");
- this.load.image("bullet1", "src/assets/bullet.png");
- this.load.image("zombie", "src/assets/zombie.png"); // Chargez l'image du zombie
+    // chargement tuiles de jeu
+    this.load.image("Phaser_tuilesdejeu_1", "src/assets/nazi_zombie_tiles.png");
+    this.load.image("Phaser_tuilesdejeu_2", "src/assets/nazi_zombies_machines.png");
+    this.load.image("bullet1", "src/assets/bullet.png");
+    this.load.image("zombie", "src/assets/zombie.png"); // Chargez l'image du zombie
 
- this.load.spritesheet("perso2", "src/assets/jaune.png", {
-  frameWidth: 32,
-  frameHeight: 48
-});
-this.load.spritesheet("jauneg", "src/assets/jaune_coursg.png", {
-  frameWidth: 48,
-  frameHeight: 48
-});
-this.load.spritesheet("jauned", "src/assets/jaune_cours.png", {
-  frameWidth: 48,
-  frameHeight: 48
-});
-this.load.spritesheet("dead", "src/assets/jaune_meurt.png", {
-  frameWidth: 48,
-  frameHeight: 48
-});
+    this.load.spritesheet("perso2", "src/assets/jaune.png", {
+      frameWidth: 32,
+      frameHeight: 48
+    });
+    this.load.spritesheet("jauneg", "src/assets/jaune_coursg.png", {
+      frameWidth: 48,
+      frameHeight: 48
+    });
+    this.load.spritesheet("jauned", "src/assets/jaune_cours.png", {
+      frameWidth: 48,
+      frameHeight: 48
+    });
+    this.load.spritesheet("dead", "src/assets/jaune_meurt.png", {
+      frameWidth: 48,
+      frameHeight: 48
+    });
 
- // chargement de la map
- this.load.tilemapTiledJSON("carte_niveau2", "src/assets/map2.json");
+    // chargement de la map
+    this.load.tilemapTiledJSON("carte_niveau2", "src/assets/map2.json");
 
   }
 
   create() {
 
     this.groupe_plateformes = this.physics.add.staticGroup();
-    
+
     this.porte_retour = this.physics.add.staticSprite(100, 350, "img_porte2");
 
     const carteDuNiveau2 = this.add.tilemap("carte_niveau2");
 
-    const tileset1 = carteDuNiveau2.addTilesetImage("nazi_zombie_tiles","Phaser_tuilesdejeu_1");
+    const tileset1 = carteDuNiveau2.addTilesetImage("nazi_zombie_tiles", "Phaser_tuilesdejeu_1");
 
     const tileset2 = carteDuNiveau2.addTilesetImage("map3", "Phaser_tuilesdejeu_2");
 
-    const calque_background_1 = carteDuNiveau2.createLayer("Calque de Tuiles 1",[tileset1, tileset2] ,0 ,0);
+    const calque_background_1 = carteDuNiveau2.createLayer("Calque de Tuiles 1", [tileset1, tileset2], 0, 0);
 
-    const calque_background_2 = carteDuNiveau2.createLayer("Calque de Tuiles 2",[tileset1, tileset2], 0, 0);
+    const calque_background_2 = carteDuNiveau2.createLayer("Calque de Tuiles 2", [tileset1, tileset2], 0, 0);
 
-    const calque_background_3 = carteDuNiveau2.createLayer("Calque de Tuiles 3",[tileset1, tileset2], 0, 0);
+    const calque_background_3 = carteDuNiveau2.createLayer("Calque de Tuiles 3", [tileset1, tileset2], 0, 0);
 
     calque_background_2.setCollisionByProperty({ EstSolide: true });
 
@@ -58,6 +77,7 @@ this.load.spritesheet("dead", "src/assets/jaune_meurt.png", {
     this.player2 = this.physics.add.sprite(200, 450, "perso2");
     this.player2.setBounce(0.0);
     this.player2.setCollideWorldBounds(true);
+    this.player2.direction = 'right';
     this.clavier = this.input.keyboard.createCursorKeys();
 
     this.physics.add.collider(this.player2, calque_background_2);
@@ -109,14 +129,23 @@ this.load.spritesheet("dead", "src/assets/jaune_meurt.png", {
     this.player2Health = 100; // Points de vie initiaux du joueur
     // ...
 
+    cursors = this.input.keyboard.createCursorKeys();
+
+    // affectation de la touche A à boutonFeu
+    boutonFeu = this.input.keyboard.addKey('A');
+
+    groupeBullets = this.physics.add.group();
+
   }
 
   update() {
     if (this.clavier.left.isDown) {
       this.player2.setVelocityX(-160);
+      this.player2.direction = 'left';
       this.player2.anims.play("anim_tourne_gauche", true);
     } else if (this.clavier.right.isDown) {
       this.player2.setVelocityX(160);
+      this.player2.direction = 'right';
       this.player2.anims.play("anim_tourne_droite", true);
     } else if (this.clavier.up.isDown) {
       this.player2.setVelocityY(-160);
@@ -146,5 +175,13 @@ this.load.spritesheet("dead", "src/assets/jaune_meurt.png", {
     this.healthBar.fillStyle(0x00ff00, 1); // Réapplique la couleur de remplissage (rouge)
     this.healthBar.fillRect(0, 0, 100 * playerHealthPercentage, 6.67); // Redessine la barre de santé avec la nouvelle largeur
 
+  
+
+    if (Phaser.Input.Keyboard.JustDown(boutonFeu)) {
+      tirer(player2);
+    }
+
   }
+
+
 }
