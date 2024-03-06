@@ -62,9 +62,9 @@ this.load.spritesheet("dead", "src/assets/jaune_meurt.png", {
 
     this.physics.add.collider(this.player2, calque_background_2);
 
-    this.physics.world.setBounds(0, 0, 3200, 640);
+    this.physics.world.setBounds(0, 0, 3200, 1200);
     //  ajout du champs de la caméra de taille identique à celle du monde
-    this.cameras.main.setBounds(0, 0, 3200, 640);
+    this.cameras.main.setBounds(0, 0, 3200, 1200);
     // ancrage de la caméra sur le joueur
     this.cameras.main.startFollow(this.player2);
     // player.setCollideWorldBounds(true);
