@@ -1,12 +1,4 @@
 { "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"map2.json"
-        }
-    },
  "height":38,
  "infinite":false,
  "layers":[
@@ -184,17 +176,8 @@
          "tilewidth":32
         }, 
         {
-         "columns":8,
          "firstgid":137,
-         "image":"..\/map\/nazi_zombie_tilesets_backgrounds_by_im_not_crying_d5q09sf.png",
-         "imageheight":548,
-         "imagewidth":264,
-         "margin":0,
-         "name":"nazi_zombie_tiles",
-         "spacing":0,
-         "tilecount":136,
-         "tileheight":32,
-         "tilewidth":32
+         "source":"nazi_zombie_tiles.tsx"
         }],
  "tilewidth":32,
  "type":"map",

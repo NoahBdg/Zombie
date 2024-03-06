@@ -37,16 +37,14 @@ this.load.spritesheet("dead", "src/assets/jaune_meurt.png", {
   create() {
 
     this.groupe_plateformes = this.physics.add.staticGroup();
-    this.groupe_plateformes.create(200, 584, "img_plateforme");
-    this.groupe_plateformes.create(600, 584, "img_plateforme");
     
-
+    this.porte_retour = this.physics.add.staticSprite(100, 350, "img_porte2");
 
     const carteDuNiveau2 = this.add.tilemap("carte_niveau2");
 
-    const tileset1 = carteDuNiveau2.addTilesetImage("map","Phaser_tuilesdejeu_1");
+    const tileset1 = carteDuNiveau2.addTilesetImage("nazi_zombie_tiles","Phaser_tuilesdejeu_1");
 
-    const tileset2 = carteDuNiveau2.addTilesetImage("map3", "Phaser_tuilesdejeu_2" );
+    const tileset2 = carteDuNiveau2.addTilesetImage("map3", "Phaser_tuilesdejeu_2");
 
     const calque_background_1 = carteDuNiveau2.createLayer("Calque de Tuiles 1",[tileset1, tileset2] ,0 ,0);
 
@@ -54,12 +52,10 @@ this.load.spritesheet("dead", "src/assets/jaune_meurt.png", {
 
     const calque_background_3 = carteDuNiveau2.createLayer("Calque de Tuiles 3",[tileset1, tileset2], 0, 0);
 
-    calque_background_2.setCollisionByProperty({ estSolide: true });
+    calque_background_2.setCollisionByProperty({ Estsolide: true });
 
 
-    this.porte_retour = this.physics.add.staticSprite(100, 530, "img_porte2");
-
-    this.player2 = this.physics.add.sprite(100, 450, "perso2");
+    this.player2 = this.physics.add.sprite(200, 450, "perso2");
     this.player2.setBounce(0.0);
     this.player2.setCollideWorldBounds(true);
     this.clavier = this.input.keyboard.createCursorKeys();
@@ -133,7 +129,7 @@ this.load.spritesheet("dead", "src/assets/jaune_meurt.png", {
     }
 
     if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
-      if (this.physics.overlap(this.player, this.porte_retour)) {
+      if (this.physics.overlap(this.player2, this.porte_retour)) {
         console.log("niveau 3 : retour vers selection");
         this.scene.switch("selection");
       }

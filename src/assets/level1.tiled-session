@@ -10,6 +10,9 @@
     ],
     "file.lastUsedOpenFilter": "Tous les Fichiers (*)",
     "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
         "map/map1.json": {
             "scale": 0.5,
             "selectedLayer": 3,
@@ -70,6 +73,17 @@
                 "x": 583,
                 "y": 381.66666666666663
             }
+        },
+        "niveau2.json": {
+            "scale": 0.75,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 567.3333333333333,
+                "y": 533.3333333333334
+            }
+        },
+        "niveau2.json#nazi_zombie_tiles": {
+            "scaleInDock": 1
         }
     },
     "last.exportedFilePath": "C:/Users/utilisateur/Desktop/Zombie_Nino_Noah/Zombie/src/assets",
@@ -84,6 +98,7 @@
     "project": "level1.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "niveau2.json",
         "maptileset.tsx",
         "niveau1.json",
         "map/map1.tmx",
