@@ -288,10 +288,10 @@ export default class niveau2 extends Phaser.Scene {
     // Arrête tous les éléments du jeu nécessitant une mise à jour
     this.physics.pause(); // Arrête la simulation physique
 
-    // Affiche un message de game over
+    // Affiche un message de game over au milieu de l'écran
     const gameOverText = this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 2, 'Game Over', { fontFamily: 'Arial', fontSize: 48, color: '#ff0000' });
-    gameOverText.setOrigin(0.5);
-  }
+    gameOverText.setOrigin(0.5); // Définir l'origine du texte au centre pour le centrer sur l'écran
+}
 
   
 }
