@@ -194,9 +194,15 @@ export default class niveau1 extends Phaser.Scene {
 
   this.zombCountText.setText('Zombies: ' + zombCount);
 
-  if (zombCount == 0) {
+  if (zombCount ==0) {
   this.createWave();
   }
+
+  
+  zombies.children.iterate(function (zombie) {
+    zombie.setVelocityX(zombie.direction);
+    zombie.setVelocityY(zombie.vitesse);
+  })
 
   }
   
@@ -223,16 +229,17 @@ export default class niveau1 extends Phaser.Scene {
   }
 
   createWave() {
-    for (var i = 0; i < 5 + waveCount * 2; i++) {
+    for (var i = 0; i <= 5 + waveCount * 2; i++) {
         var a = Phaser.Math.Between(1, 550);
         var b = Phaser.Math.Between(620, 660);
         var zombie = zombies.create(650, 450, 'zombie');
-        zombie.direction = Phaser.Math.Between(-100, 100);
+        zombie.direction = Phaser.Math.Between(-30, 30);
         zombie.vitesse = ((waveCount + 1) / 3) * (-50);
         zombie.hp = 100; // Définir les points de vie initiaux pour chaque zombie
-        zombCount = (5 + waveCount * 2);
+        
     }
     waveCount++;
+    zombCount = (5 + waveCount * 2);
 }
     
   }
