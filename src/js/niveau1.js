@@ -6,7 +6,7 @@ var groupeBullets;
 var cursors;
 
 var zombies;
-var waveCount = 0 ; // Compteur de vagues
+var waveCount = 0; // Compteur de vagues
 var zombCount = 0;
 export default class niveau1 extends Phaser.Scene {
   // constructeur de la classe
@@ -50,8 +50,8 @@ export default class niveau1 extends Phaser.Scene {
   create() {
     fct.doNothing();
     fct.doAlsoNothing();
-    
-    
+
+
     zombies = this.physics.add.group();
     zombies.hp = 100;
 
@@ -117,6 +117,7 @@ export default class niveau1 extends Phaser.Scene {
       repeat: -1
     });
 
+    this.physics.add.overlap(this.player2, zombies, this.contactZombie, null, this);
 
     // creation de l'animation "anim_tourne_droite" qui sera jouée sur le player lorsque ce dernier tourne à droite
     this.anims.create({
@@ -146,9 +147,9 @@ export default class niveau1 extends Phaser.Scene {
     groupeBullets = this.physics.add.group();
 
     this.ballesTirees = [];
-    
+
     this.zombCountText = this.add.text(15, 30, 'Zombies: ' + zombCount, { fontFamily: 'Arial', fontSize: 24, color: '#ffffff' });
-  
+
 
   }
 
@@ -195,41 +196,52 @@ export default class niveau1 extends Phaser.Scene {
     if (zombies.hp <= 0) {
       zombies.destroy();
       zombCount--;
+    }
+
+    this.zombCountText.setText('Zombies: ' + zombCount);
+
+    if (zombCount == 0) {
+      this.createWave();
+    }
+
+
+    zombies.children.iterate(function (zombie) {
+      const dx = this.player2.x - zombie.x; // Différence de position horizontale entre le joueur et le zombie
+      const dy = this.player2.y - zombie.y; // Différence de position verticale entre le joueur et le zombie
+
+      // Calcul de la direction vers laquelle le zombie doit se déplacer
+      const angle = Math.atan2(dy, dx);
+
+      // Vitesse du zombie
+      const speed = 100; // Vous pouvez ajuster cette valeur pour contrôler la vitesse du zombie
+
+      // Déplacement du zombie selon la direction calculée
+      zombie.setVelocityX(Math.cos(angle) * speed);
+      zombie.setVelocityY(Math.sin(angle) * speed);
+  }, this);
+
+    this.physics.collide(zombies, this.calque_background_3, (zombie) => {
+      // Inverser la vélocité du zombie
+      zombie.setVelocityX(zombie.body.velocity.x * -1);
+      zombie.setVelocityY(zombie.body.velocity.y * -1);
+    });
+
   }
 
-  this.zombCountText.setText('Zombies: ' + zombCount);
-
-  if (zombCount ==0) {
-  this.createWave();
-  }
-
-
-  zombies.children.iterate(function (zombie) {
-    zombie.setVelocityX(zombie.direction);
-    zombie.setVelocityY(zombie.vitesse);
-  })
-
-  this.physics.collide(zombies, this.calque_background_3, (zombie) => {
-    // Inverser la vélocité du zombie
-    zombie.setVelocityX(zombie.body.velocity.x * -1);
-    zombie.setVelocityY(zombie.body.velocity.y * -1);
-});
-
-  }
-  
   tirer(player2) {
     var coefDir;
     if (this.player2.direction == 'left') {
-       coefDir = -1; 
+      coefDir = -1;
     } else {
-       coefDir = 1; 
+      coefDir = 1;
     }
 
     var bullet = groupeBullets.create(player2.x + (25 * coefDir), player2.y - 4, 'bullet1');
     bullet.setCollideWorldBounds(true);
     bullet.body.allowGravity = false;
     bullet.setVelocity(1000 * coefDir, 0);
-    
+
+
 
     this.physics.add.collider(bullet, zombies, (bullet, zombie) => {
       bullet.destroy(); // Détruire la balle lorsqu'elle touche un zombie
@@ -237,10 +249,10 @@ export default class niveau1 extends Phaser.Scene {
       zombie.hp -= 50; // Appliquer 50 points de dégâts au zombie
 
       if (zombie.hp <= 0) {
-          zombie.destroy(); // Détruire le zombie si ses points de vie tombent à zéro
-          zombCount--; // Décrémenter le nombre de zombies restants
+        zombie.destroy(); // Détruire le zombie si ses points de vie tombent à zéro
+        zombCount--; // Décrémenter le nombre de zombies restants
       }
-  });
+    });
 
     this.ballesTirees.push(bullet); // Ajoutez la balle au tableau des balles tirées
 
@@ -252,20 +264,50 @@ export default class niveau1 extends Phaser.Scene {
   }
 
   createWave() {
-    for (var i = 0; i <= 6 + waveCount * 2; i++) {
-        var a = Phaser.Math.Between(1, 550);
-        var b = Phaser.Math.Between(620, 660);
-        var zombie = zombies.create(650, 450, 'zombie');
-        zombie.direction = Phaser.Math.Between(-30, 30);
-        zombie.vitesse = ((waveCount + 1) / 3) * (-50);
-        zombie.hp = 100; // Définir les points de vie initiaux pour chaque zombie
-        
+    for (var i = 4; i <= 6 + waveCount ; i++) {
+      var a = Phaser.Math.Between(1, 550);
+      var b = Phaser.Math.Between(620, 660);
+      var zombie = zombies.create(650, 450, 'zombie');
+      zombie.direction = Phaser.Math.Between(-30, 30);
+      zombie.vitesse = ((waveCount + 1) / 3) * (-50);
+      zombie.hp = 100; // Définir les points de vie initiaux pour chaque zombie
+
     }
     waveCount++;
-    zombCount = (5 + waveCount * 2);
-}
-   
+    zombCount = (1 + waveCount );
   }
+  contactZombie(player, zombie) {
+    console.log(this.player2Health)
+    this.player2Health -= 1; // Réduire la santé du joueur de 10 points lorsqu'il entre en contact avec un zombie
+
+    console.log(this.player2Health)
+
+    if (this.player2Health <= 0) {
+      // Game over si la santé du joueur atteint 0 ou moins
+      // Vous pouvez ajouter votre logique de gestion du game over ici
+      this.gameOver();    }
+
+  }
+  gameOver() {
+    // Arrête tous les éléments du jeu nécessitant une mise à jour
+    this.physics.pause(); // Arrête la simulation physique
+
+    // Affiche un message de game over
+    const gameOverText = this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 2, 'Game Over', { fontFamily: 'Arial', fontSize: 48, color: '#ff0000' });
+    gameOverText.setOrigin(0.5);
+
+    // Ajoutez d'autres éléments à afficher lors du game over, comme un bouton pour redémarrer le jeu
+
+    // Vous pouvez également définir un délai pour redémarrer le jeu ou pour afficher un écran de game over pendant quelques secondes avant de redémarrer
+
+    // Par exemple, pour redémarrer le jeu après 3 secondes
+    /*setTimeout(() => {
+        // Redémarre le jeu
+        this.scene.restart();
+    }, 3000);**/
+}
+
+}
 
 
 
