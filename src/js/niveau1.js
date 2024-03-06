@@ -1,6 +1,10 @@
 import * as fct from "/src/js/fonctions.js";
 
 var player2;//désigne le sprite du joueur
+var boutonFeu;
+var groupeBullets;
+var cursors;
+
 var zombies;
 var waveCount = 0 ; // Compteur de vagues
 var zombCount
@@ -80,7 +84,7 @@ export default class niveau1 extends Phaser.Scene {
     this.physics.add.collider(zombies, calque_background_3);
 
     this.clavier = this.input.keyboard.createCursorKeys();
-    this.physics.add.collider(this.player2, this.groupe_plateformes);
+
 
 
     this.physics.add.collider(this.player2, calque_background_3);
@@ -131,6 +135,14 @@ export default class niveau1 extends Phaser.Scene {
     // Autres initialisations
     this.player2Health = 100; // Points de vie initiaux du joueur
     // ...
+    cursors = this.input.keyboard.createCursorKeys();
+
+    // affectation de la touche A à boutonFeu
+    boutonFeu = this.input.keyboard.addKey('A');
+
+    groupeBullets = this.physics.add.group();
+
+    this.ballesTirees = [];
     function createWave() {
       for (var i = 0; i < 5 + waveCount * 2; i++) {
           var a = Phaser.Math.Between(1, 550);
@@ -149,9 +161,11 @@ export default class niveau1 extends Phaser.Scene {
   update() {
     if (this.clavier.left.isDown) {
       this.player2.setVelocityX(-160);
+      this.player2.direction = 'left';
       this.player2.anims.play("anim_tourne_gauche", true);
     } else if (this.clavier.right.isDown) {
       this.player2.setVelocityX(160);
+      this.player2.direction = 'right';
       this.player2.anims.play("anim_tourne_droite", true);
     } else if (this.clavier.up.isDown) {
       this.player2.setVelocityY(-160);
@@ -179,6 +193,34 @@ export default class niveau1 extends Phaser.Scene {
     this.healthBar.fillStyle(0x00ff00, 1); // Réapplique la couleur de remplissage (rouge)
     this.healthBar.fillRect(0, 0, 100 * playerHealthPercentage, 6.67); // Redessine la barre de santé avec la nouvelle largeur
 
+    if (Phaser.Input.Keyboard.JustDown(boutonFeu)) {
+      this.tirer(this.player2);
+    }
+
+
+  }
+  
+  tirer(player2) {
+    var coefDir;
+    if (this.player2.direction == 'left') {
+       coefDir = -1; 
+    } else {
+       coefDir = 1; 
+    }
+
+    var bullet = groupeBullets.create(player2.x + (25 * coefDir), player2.y - 4, 'bullet1');
+    bullet.setCollideWorldBounds(true);
+    bullet.body.allowGravity = false;
+    bullet.setVelocity(1000 * coefDir, 0);
+
+    this.ballesTirees.push(bullet); // Ajoutez la balle au tableau des balles tirées
+
+    // Détruire la balle après 10 secondes
+    setTimeout(() => {
+      bullet.destroy(); // Détruit la balle
+      this.ballesTirees.splice(this.ballesTirees.indexOf(bullet), 1); // Supprimez la balle du tableau des balles tirées
+    }, 500);
+  }
     zombies.children.iterate(function (zombie) {
       zombie.setVelocityX(zombie.direction);
       zombie.setVelocityY(zombie.vitesse);
