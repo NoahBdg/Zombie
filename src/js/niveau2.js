@@ -30,7 +30,7 @@ this.load.spritesheet("dead", "src/assets/jaune_meurt.png", {
 });
 
  // chargement de la map
- this.load.tilemapTiledJSON("carte_niveau2", "src/assets/niveau2.json");
+ this.load.tilemapTiledJSON("carte_niveau2", "src/assets/map2.json");
 
   }
 
