@@ -125,6 +125,9 @@ export default class niveau2 extends Phaser.Scene {
 
     groupeBullets = this.physics.add.group();
 
+    this.ballesTirees = [];
+
+
   }
 
   update() {
@@ -175,20 +178,24 @@ export default class niveau2 extends Phaser.Scene {
 
   tirer(player2) {
     var coefDir;
-    if (this.player2.direction == 'left') 
-    {
+    if (this.player2.direction == 'left') {
        coefDir = -1; 
-    } 
-    else 
-    {
-    coefDir = 1 
+    } else {
+       coefDir = 1; 
     }
-    // on crée la balle a coté du joueur
+
     var bullet = groupeBullets.create(player2.x + (25 * coefDir), player2.y - 4, 'bullet1');
-    // parametres physiques de la balle.
     bullet.setCollideWorldBounds(true);
     bullet.body.allowGravity = false;
-    bullet.setVelocity(1000 * coefDir, 0); // vitesse en x et en y
+    bullet.setVelocity(1000 * coefDir, 0);
+
+    this.ballesTirees.push(bullet); // Ajoutez la balle au tableau des balles tirées
+
+    // Détruire la balle après 10 secondes
+    setTimeout(() => {
+      bullet.destroy(); // Détruit la balle
+      this.ballesTirees.splice(this.ballesTirees.indexOf(bullet), 1); // Supprimez la balle du tableau des balles tirées
+    }, 500);
   }
 
 }
