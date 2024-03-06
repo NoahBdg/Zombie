@@ -14,6 +14,9 @@ export default class niveau1 extends Phaser.Scene {
     super({
       key: "niveau1" //  ici on précise le nom de la classe en tant qu'identifiant
     });
+    
+    this.calque_background_3 = null;
+
   }
 
 
@@ -69,7 +72,8 @@ export default class niveau1 extends Phaser.Scene {
     const calque_background_2 = carteDuNiveau.createLayer("Calque de Tuiles 2", [tileset1, tileset2], 0, 0);
 
     const calque_background_3 = carteDuNiveau.createLayer("Calque de Tuiles 3", [tileset1, tileset2], 0, 0);
-
+    this.calque_background_3 = calque_background_3; // Assignez la valeur à la variable de classe
+    // ...
     const calque_background_4 = carteDuNiveau.createLayer("calque mur", [tileset1, tileset2], 0, 0);
 
     // définition des tuiles de plateformes qui sont solides
@@ -150,6 +154,7 @@ export default class niveau1 extends Phaser.Scene {
 
 
   update() {
+
     if (this.clavier.left.isDown) {
       this.player2.setVelocityX(-160);
       this.player2.direction = 'left';
@@ -198,11 +203,17 @@ export default class niveau1 extends Phaser.Scene {
   this.createWave();
   }
 
-  
+
   zombies.children.iterate(function (zombie) {
     zombie.setVelocityX(zombie.direction);
     zombie.setVelocityY(zombie.vitesse);
   })
+
+  this.physics.collide(zombies, this.calque_background_3, (zombie) => {
+    // Inverser la vélocité du zombie
+    zombie.setVelocityX(zombie.body.velocity.x * -1);
+    zombie.setVelocityY(zombie.body.velocity.y * -1);
+});
 
   }
   
@@ -241,7 +252,7 @@ export default class niveau1 extends Phaser.Scene {
     waveCount++;
     zombCount = (5 + waveCount * 2);
 }
-    
+   
   }
 
 
