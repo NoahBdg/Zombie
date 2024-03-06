@@ -14,6 +14,8 @@ export default class niveau1 extends Phaser.Scene {
     this.load.image("Phaser_tuilesdejeu_1", "src/assets/nazi_zombie_tiles.png");
     this.load.image("Phaser_tuilesdejeu_2", "src/assets/nazi_zombies_machines.png");
     this.load.image("bullet1", "src/assets/bullet.png");
+    this.load.image("zombie", "src/assets/zombie.png"); // Chargez l'image du zombie
+
     this.load.spritesheet("perso2", "src/assets/jaune.png", {
       frameWidth: 32,
       frameHeight: 48
@@ -122,6 +124,7 @@ export default class niveau1 extends Phaser.Scene {
     // Autres initialisations
     this.player2Health = 100; // Points de vie initiaux du joueur
     // ...
+
   }
 
 
@@ -157,5 +160,10 @@ export default class niveau1 extends Phaser.Scene {
     this.healthBar.clear(); // Efface le contenu précédent de la barre de santé
     this.healthBar.fillStyle(0x00ff00, 1); // Réapplique la couleur de remplissage (rouge)
     this.healthBar.fillRect(0, 0, 100 * playerHealthPercentage, 6.67); // Redessine la barre de santé avec la nouvelle largeur
+
+
+
   }
+
 }
+
