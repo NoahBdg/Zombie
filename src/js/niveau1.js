@@ -15,6 +15,8 @@ export default class niveau1 extends Phaser.Scene {
       key: "niveau1" //  ici on précise le nom de la classe en tant qu'identifiant
     });
   }
+
+
   preload() {
     // chargement tuiles de jeu
     this.load.image("Phaser_tuilesdejeu_1", "src/assets/nazi_zombie_tiles.png");
@@ -141,7 +143,7 @@ export default class niveau1 extends Phaser.Scene {
 
     this.ballesTirees = [];
     
-    this.zombCountText = this.add.text(10, 10, 'Zombies: ' + zombCount, { fontFamily: 'Arial', fontSize: 24, color: '#ffffff' });
+    this.zombCountText = this.add.text(15, 30, 'Zombies: ' + zombCount, { fontFamily: 'Arial', fontSize: 24, color: '#ffffff' });
   
 
   }
@@ -192,6 +194,10 @@ export default class niveau1 extends Phaser.Scene {
 
   this.zombCountText.setText('Zombies: ' + zombCount);
 
+  if (zombCount == 0) {
+  this.createWave();
+  }
+
   }
   
   tirer(player2) {
@@ -216,14 +222,14 @@ export default class niveau1 extends Phaser.Scene {
     }, 500);
   }
 
-  createWave(scene) {
+  createWave() {
     for (var i = 0; i < 5 + waveCount * 2; i++) {
         var a = Phaser.Math.Between(1, 550);
         var b = Phaser.Math.Between(620, 660);
-        var zombies = scene.zombies.create(650, 450, 'zombie');
-        zombies.direction = Phaser.Math.Between(-100, 100);
-        zombies.vitesse = ((waveCount + 1) / 3) * (-50);
-        zombies.hp = 100; // Définir les points de vie initiaux pour chaque zombie
+        var zombie = zombies.create(650, 450, 'zombie');
+        zombie.direction = Phaser.Math.Between(-100, 100);
+        zombie.vitesse = ((waveCount + 1) / 3) * (-50);
+        zombie.hp = 100; // Définir les points de vie initiaux pour chaque zombie
         zombCount = (5 + waveCount * 2);
     }
     waveCount++;
