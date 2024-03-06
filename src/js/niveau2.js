@@ -4,17 +4,6 @@ var cursors;
 var player2;
 
 
-function tirer(player2) {
-  var coefDir;
-  if (this.player2.direction == 'left') { coefDir = -1; } else { coefDir = 1 }
-  // on crée la balle a coté du joueur
-  var bullet = groupeBullets.create(this.player2.x + (25 * coefDir), this.player2.y - 4, 'bullet1');
-  // parametres physiques de la balle.
-  bullet.setCollideWorldBounds(true);
-  bullet.body.allowGravity = false;
-  bullet.setVelocity(1000 * coefDir, 0); // vitesse en x et en y
-}
-
 
 export default class niveau2 extends Phaser.Scene {
   // constructeur de la classe
@@ -178,10 +167,28 @@ export default class niveau2 extends Phaser.Scene {
   
 
     if (Phaser.Input.Keyboard.JustDown(boutonFeu)) {
-      tirer(player2);
+      this.tirer(this.player2);
     }
 
+    
   }
 
+  tirer(player2) {
+    var coefDir;
+    if (this.player2.direction == 'left') 
+    {
+       coefDir = -1; 
+    } 
+    else 
+    {
+    coefDir = 1 
+    }
+    // on crée la balle a coté du joueur
+    var bullet = groupeBullets.create(player2.x + (25 * coefDir), player2.y - 4, 'bullet1');
+    // parametres physiques de la balle.
+    bullet.setCollideWorldBounds(true);
+    bullet.body.allowGravity = false;
+    bullet.setVelocity(1000 * coefDir, 0); // vitesse en x et en y
+  }
 
 }
