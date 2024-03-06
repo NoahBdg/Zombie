@@ -7,7 +7,7 @@ var cursors;
 
 var zombies;
 var waveCount = 0 ; // Compteur de vagues
-var zombCount
+var zombCount = 0;
 export default class niveau1 extends Phaser.Scene {
   // constructeur de la classe
   constructor() {
@@ -45,13 +45,10 @@ export default class niveau1 extends Phaser.Scene {
   create() {
     fct.doNothing();
     fct.doAlsoNothing();
+    
+    
     zombies = this.physics.add.group();
-    this.time.addEvent({
-      delay: 3000, // Délai entre chaque vague de zombies
-      loop: false,
-      callback: createWave,
-      callbackScope: this
-  });
+    zombies.hp = 100;
 
 
     this.porte_retour = this.physics.add.staticSprite(100, 530, "img_porte1");
@@ -143,18 +140,10 @@ export default class niveau1 extends Phaser.Scene {
     groupeBullets = this.physics.add.group();
 
     this.ballesTirees = [];
-    function createWave() {
-      for (var i = 0; i < 5 + waveCount * 2; i++) {
-          var a = Phaser.Math.Between(1, 550);
-          var b = Phaser.Math.Between(620, 660);
-          var zombie = zombies.create(650, 450, 'zombie');
-          zombie.direction = Phaser.Math.Between(-30, 30);
-          zombie.vitesse = ((waveCount + 1) / 3) * (-50);
-                  zombie.body.setBounce(1); // 1 signifie un rebondissement total
+    
+    this.zombCountText = this.add.text(10, 10, 'Zombies: ' + zombCount, { fontFamily: 'Arial', fontSize: 24, color: '#ffffff' });
+  
 
-      }
-      waveCount++;
-  }
   }
 
 
@@ -196,7 +185,12 @@ export default class niveau1 extends Phaser.Scene {
     if (Phaser.Input.Keyboard.JustDown(boutonFeu)) {
       this.tirer(this.player2);
     }
+    if (zombies.hp <= 0) {
+      zombies.destroy();
+      zombCount--;
+  }
 
+  this.zombCountText.setText('Zombies: ' + zombCount);
 
   }
   
@@ -221,15 +215,21 @@ export default class niveau1 extends Phaser.Scene {
       this.ballesTirees.splice(this.ballesTirees.indexOf(bullet), 1); // Supprimez la balle du tableau des balles tirées
     }, 500);
   }
-    zombies.children.iterate(function (zombie) {
-      zombie.setVelocityX(zombie.direction);
-      zombie.setVelocityY(zombie.vitesse);
-      
-      });
-    if (1==2) {
-      createWave(); // Créer une nouvelle vague
+
+  createWave(scene) {
+    for (var i = 0; i < 5 + waveCount * 2; i++) {
+        var a = Phaser.Math.Between(1, 550);
+        var b = Phaser.Math.Between(620, 660);
+        var zombies = scene.zombies.create(650, 450, 'zombie');
+        zombies.direction = Phaser.Math.Between(-100, 100);
+        zombies.vitesse = ((waveCount + 1) / 3) * (-50);
+        zombies.hp = 100; // Définir les points de vie initiaux pour chaque zombie
+        zombCount = (5 + waveCount * 2);
     }
+    waveCount++;
+}
+    
   }
 
-}
+
 
