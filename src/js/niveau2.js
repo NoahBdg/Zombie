@@ -200,7 +200,7 @@ export default class niveau2 extends Phaser.Scene {
       const angle = Math.atan2(dy, dx);
 
       // Vitesse du zombie
-      const speed = 100; // Vous pouvez ajuster cette valeur pour contrôler la vitesse du zombie
+      const speed = 50; // Vous pouvez ajuster cette valeur pour contrôler la vitesse du zombie
 
       // Déplacement du zombie selon la direction calculée
       zombie.setVelocityX(Math.cos(angle) * speed);
@@ -249,18 +249,25 @@ export default class niveau2 extends Phaser.Scene {
 
   }
   createWave() {
-    for (var i = 4; i <= 6 + waveCount; i++) {
-      var a = Phaser.Math.Between(1, 550);
-      var b = Phaser.Math.Between(620, 660);
-      var zombie = zombies.create(650, 450, 'zombie');
-      zombie.direction = Phaser.Math.Between(-30, 30);
-      zombie.vitesse = ((waveCount + 1) / 3) * (-50);
-      zombie.hp = 100; // Définir les points de vie initiaux pour chaque zombie
-
+    for (var i = 0; i <= 6 + waveCount ; i++) {
+        // Générer des coordonnées aléatoires pour l'apparition des zombies
+        var spawnX = Phaser.Math.Between(100, 3000); // Générer une coordonnée X aléatoire dans la zone de jeu
+        var spawnY = Phaser.Math.Between(100, 500); // Générer une coordonnée Y aléatoire dans la zone de jeu
+        
+        // Créer un zombie à ces coordonnées aléatoires
+        var zombie = zombies.create(spawnX, spawnY, 'zombie');
+        
+        // Définir d'autres propriétés du zombie
+        zombie.direction = Phaser.Math.Between(-30, 30);
+        zombie.vitesse = ((waveCount + 1) / 3) * (-20);
+        zombie.hp = 100; // Définir les points de vie initiaux pour chaque zombie
+        zombCount++
     }
+    
+    // Mettre à jour le nombre total de zombies en fonction du nombre de vagues
     waveCount++;
-    zombCount = (2 + waveCount);
-  }
+    
+}
   contactZombie(player, zombie) {
     console.log(this.player2Health)
     this.player2Health -= 1; // Réduire la santé du joueur de 10 points lorsqu'il entre en contact avec un zombie
@@ -288,3 +295,11 @@ export default class niveau2 extends Phaser.Scene {
 
   
 }
+
+
+
+
+
+
+
+

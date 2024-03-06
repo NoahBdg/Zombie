@@ -205,6 +205,26 @@ export default class niveau1 extends Phaser.Scene {
     }
 
 
+    zombies.children.iterate(function (zombie) {
+      const dx = this.player2.x - zombie.x; // Différence de position horizontale entre le joueur et le zombie
+      const dy = this.player2.y - zombie.y; // Différence de position verticale entre le joueur et le zombie
+
+      // Calcul de la direction vers laquelle le zombie doit se déplacer
+      const angle = Math.atan2(dy, dx);
+
+      // Vitesse du zombie
+      const speed = 100; // Vous pouvez ajuster cette valeur pour contrôler la vitesse du zombie
+
+      // Déplacement du zombie selon la direction calculée
+      zombie.setVelocityX(Math.cos(angle) * speed);
+      zombie.setVelocityY(Math.sin(angle) * speed);
+  }, this);
+
+    this.physics.collide(zombies, this.calque_background_3, (zombie) => {
+      // Inverser la vélocité du zombie
+      zombie.setVelocityX(zombie.body.velocity.x * -1);
+      zombie.setVelocityY(zombie.body.velocity.y * -1);
+    });
 
   }
 
@@ -254,7 +274,7 @@ export default class niveau1 extends Phaser.Scene {
 
     }
     waveCount++;
-    zombCount = (1 + waveCount );
+    zombCount = ( + waveCount );
   }
   contactZombie(player, zombie) {
     console.log(this.player2Health)
