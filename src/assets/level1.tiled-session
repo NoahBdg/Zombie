@@ -3,8 +3,10 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "map/map1.tmx",
     "expandedProjectPaths": [
+        "map",
+        "."
     ],
     "file.lastUsedOpenFilter": "Tous les Fichiers (*)",
     "fileStates": {
@@ -16,8 +18,23 @@
                 "y": 509
             }
         },
+        "map/map1.tmx": {
+            "scale": 1,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 266.5,
+                "y": 241.5
+            }
+        },
         "map/map1.tmx#map": {
+            "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "map/map1.tmx#map3": {
+            "scaleInDock": 1
+        },
+        "map/map1.tmx#nazi_zombies_machines_by_im_not_crying_d5q09o7": {
+            "scaleInDock": 1
         },
         "map/map3.tsx": {
             "scaleInDock": 1,
@@ -39,7 +56,7 @@
             "scaleInEditor": 1
         },
         "maptileset.tsx": {
-            "scaleInDock": 3,
+            "scaleInDock": 1,
             "scaleInEditor": 2
         },
         "nazi_zombies_machines_by_im_not_crying_d5q09o7.tsx": {
@@ -47,32 +64,34 @@
             "scaleInEditor": 1
         },
         "niveau1.json": {
-            "scale": 0.5,
+            "scale": 1.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 403,
-                "y": 383
+                "x": 583,
+                "y": 381.66666666666663
             }
         }
     },
     "last.exportedFilePath": "C:/Users/utilisateur/Desktop/Zombie_Nino_Noah/Zombie/src/assets",
-    "last.imagePath": "C:/Users/utilisateur/Desktop/Zombie_Nino_Noah/Sprites",
-    "map.height": 600,
+    "last.imagePath": "C:/Users/utilisateur/Desktop/Zombie_Nino_Noah/Zombie/src/map",
+    "map.height": 38,
     "map.lastUsedExportFilter": "Fichiers de carte JSON (*.tmj *.json)",
-    "map.lastUsedFormat": "tmx",
-    "map.width": 800,
+    "map.lastUsedFormat": "json",
+    "map.width": 50,
     "openFiles": [
+        "map/map1.tmx"
     ],
     "project": "level1.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "maptileset.tsx",
+        "niveau1.json",
+        "map/map1.tmx",
         "map/nazi_zombies_machines_by_im_not_crying_d5q09o7.tsx",
         "map/map3.tsx",
-        "niveau1.json",
         "nazi_zombies_machines_by_im_not_crying_d5q09o7.tsx",
         "map3.tsx",
-        "map2.tsx",
-        "maptileset.tsx"
+        "map2.tsx"
     ],
     "tileset.lastUsedFormat": "tsx"
 }
