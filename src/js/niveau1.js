@@ -26,7 +26,8 @@ export default class niveau1 extends Phaser.Scene {
     this.load.image("Phaser_tuilesdejeu_2", "src/assets/nazi_zombies_machines.png");
     this.load.image("bullet1", "src/assets/bullet.png");
     this.load.image("zombie", "src/assets/zombie.png"); // Chargez l'image du zombie
-
+    this.load.audio('shootSound', 'src/assets/bruit_tir.mp3');
+    this.load.audio('deathSound', 'src/assets/bruit_mort.m4a');
     this.load.spritesheet("perso2", "src/assets/jaune.png", {
       frameWidth: 32,
       frameHeight: 48
@@ -51,7 +52,8 @@ export default class niveau1 extends Phaser.Scene {
     fct.doNothing();
     fct.doAlsoNothing();
 
-
+    this.shootSound = this.sound.add('shootSound');
+    this.deathSound = this.sound.add('deathSound');
     zombies = this.physics.add.group();
     zombies.hp = 100;
 
@@ -172,7 +174,10 @@ export default class niveau1 extends Phaser.Scene {
       this.player2.setVelocityX(0);
       this.player2.setVelocityY(0);
       this.player2.anims.play("anim_face");
-
+      if (Phaser.Input.Keyboard.JustDown(boutonFeu)) {
+        this.tirer(this.player2);
+        this.shootSound.play(); // Jouer le son de tir lorsque le joueur appuie sur la touche de tir
+    }
       if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
         if (this.physics.overlap(this.player2, this.porte_retour)) {
           this.scene.switch("selection");
@@ -226,6 +231,8 @@ export default class niveau1 extends Phaser.Scene {
       zombie.setVelocityY(zombie.body.velocity.y * -1);
     });
 
+    
+
   }
 
   tirer(player2) {
@@ -278,7 +285,7 @@ export default class niveau1 extends Phaser.Scene {
   }
   contactZombie(player, zombie) {
     console.log(this.player2Health)
-    this.player2Health -= 1; // Réduire la santé du joueur de 10 points lorsqu'il entre en contact avec un zombie
+    this.player2Health -= 0.25; // Réduire la santé du joueur de 10 points lorsqu'il entre en contact avec un zombie
 
     console.log(this.player2Health)
 
@@ -295,6 +302,7 @@ export default class niveau1 extends Phaser.Scene {
     // Affiche un message de game over
     const gameOverText = this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 2, 'Game Over', { fontFamily: 'Arial', fontSize: 48, color: '#ff0000' });
     gameOverText.setOrigin(0.5);
+    this.deathSound.play();
 
     // Ajoutez d'autres éléments à afficher lors du game over, comme un bouton pour redémarrer le jeu
 
