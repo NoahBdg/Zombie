@@ -4,7 +4,7 @@ var player2;//désigne le sprite du joueur
 var boutonFeu;
 var groupeBullets;
 var cursors;
-
+var gameOver = false; // Variable pour suivre l'état du jeu
 var zombies;
 var waveCount = 0; // Compteur de vagues
 var zombCount = 0;
@@ -120,6 +120,7 @@ export default class niveau1 extends Phaser.Scene {
     });
 
     this.physics.add.overlap(this.player2, zombies, this.contactZombie, null, this);
+    this.input.keyboard.on('keydown-R', this.recommencer, this);
 
     // creation de l'animation "anim_tourne_droite" qui sera jouée sur le player lorsque ce dernier tourne à droite
     this.anims.create({
@@ -174,9 +175,8 @@ export default class niveau1 extends Phaser.Scene {
       this.player2.setVelocityX(0);
       this.player2.setVelocityY(0);
       this.player2.anims.play("anim_face");
-      if (Phaser.Input.Keyboard.JustDown(boutonFeu)) {
+      if (!gameOver && Phaser.Input.Keyboard.JustDown(boutonFeu)) {
         this.tirer(this.player2);
-        this.shootSound.play(); // Jouer le son de tir lorsque le joueur appuie sur la touche de tir
     }
       if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
         if (this.physics.overlap(this.player2, this.porte_retour)) {
@@ -247,6 +247,7 @@ export default class niveau1 extends Phaser.Scene {
     bullet.setCollideWorldBounds(true);
     bullet.body.allowGravity = false;
     bullet.setVelocity(1000 * coefDir, 0);
+    this.shootSound.play();
 
 
 
@@ -299,20 +300,19 @@ export default class niveau1 extends Phaser.Scene {
     // Arrête tous les éléments du jeu nécessitant une mise à jour
     this.physics.pause(); // Arrête la simulation physique
 
-    // Affiche un message de game over
+    // Affiche un message de game over au milieu de l'écran
     const gameOverText = this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 2, 'Game Over', { fontFamily: 'Arial', fontSize: 48, color: '#ff0000' });
-    gameOverText.setOrigin(0.5);
+    gameOverText.setOrigin(0.5); // Définir l'origine du texte au centre pour le centrer sur l'écran
     this.deathSound.play();
 
-    // Ajoutez d'autres éléments à afficher lors du game over, comme un bouton pour redémarrer le jeu
-
-    // Vous pouvez également définir un délai pour redémarrer le jeu ou pour afficher un écran de game over pendant quelques secondes avant de redémarrer
-
-    // Par exemple, pour redémarrer le jeu après 3 secondes
-    /*setTimeout(() => {
-        // Redémarre le jeu
-        this.scene.restart();
-    }, 3000);**/
+    // Marquer le jeu comme étant en mode "game over"
+    gameOver = true;
+}
+recommencer() {
+  if (gameOver) {
+      this.scene.restart();
+      gameOver = false; // Réinitialiser l'état du jeu
+  }
 }
 
 }

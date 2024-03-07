@@ -5,6 +5,8 @@ var player2;
 var zombies;
 var waveCount = 0; // Compteur de vagues
 var zombCount = 0;
+var gameOver = false; // Variable pour suivre l'état du jeu
+
 
 
 export default class niveau2 extends Phaser.Scene {
@@ -21,7 +23,8 @@ export default class niveau2 extends Phaser.Scene {
     this.load.image("Phaser_tuilesdejeu_2", "src/assets/nazi_zombies_machines.png");
     this.load.image("bullet1", "src/assets/bullet.png");
     this.load.image("zombie", "src/assets/zombie.png"); // Chargez l'image du zombie
-
+    this.load.audio('shootSound', 'src/assets/bruit_tir.mp3');
+    this.load.audio('deathSound', 'src/assets/bruit_mort.m4a');
     this.load.spritesheet("perso2", "src/assets/jaune.png", {
       frameWidth: 32,
       frameHeight: 48
@@ -66,6 +69,7 @@ export default class niveau2 extends Phaser.Scene {
     const calque_background_3 = carteDuNiveau2.createLayer("Calque de Tuiles 3", [tileset1, tileset2], 0, 0);
 
     calque_background_2.setCollisionByProperty({ EstSolide: true });
+    this.input.keyboard.on('keydown-R', this.recommencer, this);
 
 
     this.player2 = this.physics.add.sprite(200, 450, "perso2");
@@ -73,7 +77,10 @@ export default class niveau2 extends Phaser.Scene {
     this.player2.setCollideWorldBounds(true);
     this.player2.direction = 'right';
     this.clavier = this.input.keyboard.createCursorKeys();
-
+   
+   // ajout des bruits de tir et mort.
+    this.shootSound = this.sound.add('shootSound');
+    this.deathSound = this.sound.add('deathSound');
     this.physics.add.collider(this.player2, calque_background_2);
 
     this.physics.world.setBounds(0, 0, 1600, 1200);
@@ -156,7 +163,9 @@ export default class niveau2 extends Phaser.Scene {
       this.player2.setVelocityY(0);
       this.player2.anims.play("anim_face");
     }
-
+    if (!gameOver && Phaser.Input.Keyboard.JustDown(boutonFeu))  {
+      this.tirer(this.player2);
+  }
     if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
       if (this.physics.overlap(this.player2, this.porte_retour)) {
         console.log("niveau 3 : retour vers selection");
@@ -227,6 +236,7 @@ export default class niveau2 extends Phaser.Scene {
     bullet.setCollideWorldBounds(true);
     bullet.body.allowGravity = false;
     bullet.setVelocity(1000 * coefDir, 0);
+    this.shootSound.play();
 
     this.ballesTirees.push(bullet); // Ajoutez la balle au tableau des balles tirées
 
@@ -291,8 +301,17 @@ export default class niveau2 extends Phaser.Scene {
     // Affiche un message de game over au milieu de l'écran
     const gameOverText = this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 2, 'Game Over', { fontFamily: 'Arial', fontSize: 48, color: '#ff0000' });
     gameOverText.setOrigin(0.5); // Définir l'origine du texte au centre pour le centrer sur l'écran
-}
+    this.deathSound.play();
 
+    // Marquer le jeu comme étant en mode "game over"
+    gameOver = true;
+}
+recommencer() {
+  if (gameOver) {
+      this.scene.restart();
+      gameOver = false; // Réinitialiser l'état du jeu
+  }
+}
   
 }
 
